@@ -159,6 +159,7 @@ export default class {
             this.counter = 0;
         if (this.index === undefined || this.index !== index)
             this.index = index;
+
         if (this.counter % 2 === 0) {
             $(`#arrow-icon${this.index}`).css({ transform: "rotate(0deg)" });
             $(`#status-bills-container${this.index}`).html(
@@ -172,9 +173,14 @@ export default class {
         }
 
         bills.forEach((bill) => {
-            $(`#open-bill${bill.id}`).click((e) =>
-                this.handleEditTicket(e, bill, bills)
-            );
+            const openBillElement = $(`#open-bill${bill.id}`);
+
+            /* Delete the existing event listener */
+            openBillElement.off("click");
+
+            openBillElement.on("click", (e) => {
+                this.handleEditTicket(e, bill, bills);
+            });
         });
 
         return bills;
