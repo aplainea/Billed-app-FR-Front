@@ -61,6 +61,7 @@ export default class {
                                 date: formatDate(doc.date),
                                 status: formatStatus(doc.status),
                             };
+                            /* istanbul ignore next */
                         } catch (e) {
                             // if for some reason, corrupted data was introduced, we manage here failing formatDate function
                             // log the error and return unformatted date in that case

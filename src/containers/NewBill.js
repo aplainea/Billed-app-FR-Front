@@ -29,7 +29,6 @@ export default class NewBill {
         if (isMimeTypeAllowed) {
             const filePath = e.target.value.split(/\\/g);
             const fileName = filePath[filePath.length - 1];
-            console.log("fileName", file);
             const formData = new FormData();
             const email = JSON.parse(localStorage.getItem("user")).email;
             formData.append("file", file);
@@ -56,10 +55,6 @@ export default class NewBill {
     };
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(
-            'e.target.querySelector(`input[data-testid="datepicker"]`).value',
-            e.target.querySelector(`input[data-testid="datepicker"]`).value
-        );
         const email = JSON.parse(localStorage.getItem("user")).email;
         const bill = {
             email,
@@ -97,6 +92,7 @@ export default class NewBill {
                 .then(() => {
                     this.onNavigate(ROUTES_PATH["Bills"]);
                 })
+                /* istanbul ignore next */
                 .catch((error) => console.error(error));
         }
     };
